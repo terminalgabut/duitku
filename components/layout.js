@@ -1,6 +1,6 @@
 // root/components/layout.js
 
-import layoutView from './layoutView.js';
+import layoutView from './LayoutView.js';
 import Header from './header.js';
 import Sidebar from './sidebarView.js';
 
