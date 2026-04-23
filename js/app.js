@@ -1,7 +1,7 @@
 // js/app.js
 import { router } from './router.js';
 import Layout from '../components/layout.js';
-import { Logger } from './services/debug.js';
+import { Logger } from './utils/debug.js';
 
 const app = Vue.createApp({
     components: { 'layout-wrapper': Layout },
