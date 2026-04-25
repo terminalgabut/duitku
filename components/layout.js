@@ -1,24 +1,36 @@
 // root/components/layout.js
 
-import layoutView from './layoutView.js';
+import template from './layoutView.js';
 import Header from './header.js';
 import Sidebar from './sidebarView.js';
+import { Logger } from '../js/utils/debug.js';
 
 export default {
-    ...layoutView, // Menggabungkan template HTML dari layoutView.js
+    name: 'Layout',
+    template,
+
     components: {
         'header-component': Header,
         'sidebar-component': Sidebar
     },
+
     setup() {
         const { ref } = Vue;
-        
-        // State untuk kontrol Sidebar di Mobile (Android)
+
+        Logger.info('Layout: setup init', 'UI');
+
         const isSidebarOpen = ref(false);
 
         const toggleSidebar = () => {
             isSidebarOpen.value = !isSidebarOpen.value;
+
             document.body.style.overflow = isSidebarOpen.value ? 'hidden' : '';
+
+            Logger.debugUI(
+                'Layout',
+                'Toggle Sidebar',
+                isSidebarOpen.value ? 'OPEN' : 'CLOSED'
+            );
         };
 
         return {
@@ -26,28 +38,36 @@ export default {
             toggleSidebar
         };
     },
+
     watch: {
-        // Setiap kali route berubah (pindah halaman)
-        '$route'() {
+        '$route'(to, from) {
             this.isSidebarOpen = false;
             document.body.style.overflow = '';
-            
-            // Log perpindahan halaman untuk debug
-            if (this.$log) this.$log.info('Route Changed, refreshing icons...');
+
+            Logger.info(
+                `Route changed: ${from.fullPath} → ${to.fullPath}`,
+                'PATH'
+            );
 
             Vue.nextTick(() => {
-                if (window.lucide) window.lucide.createIcons();
+                if (window.lucide) {
+                    window.lucide.createIcons();
+                    Logger.info('Lucide icons refreshed', 'UI');
+                } else {
+                    Logger.error('Layout', 'Lucide not found');
+                }
             });
         }
     },
-    mounted() {
-        if (this.$log) this.$log.info('Master Layout Mounted');
 
-        // Inisialisasi awal ikon
+    mounted() {
+        Logger.trace('Layout', 'mounted');
+
         if (window.lucide) {
             window.lucide.createIcons();
+            Logger.info('Lucide initialized', 'UI');
         } else {
-            if (this.$log) this.$log.warn('Lucide library not detected!');
+            Logger.error('Layout', 'Lucide library not detected');
         }
     }
 };
