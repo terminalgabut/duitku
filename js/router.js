@@ -1,7 +1,7 @@
 import { Logger } from './services/debug.js';
 
 const Dashboard = () => import('../views/dashboard.js');
-const Activities = () => import('../views/activities.js');
+/*const Activities = () => import('../views/activities.js');
 const Analysis = () => import('../views/AnalysisView.js');
 const ActivityDetail = () => import('../views/activityDetail.js'); 
 const WeightTrainingDetail = () => import('../views/WeightTrainingDetail.js');
@@ -10,7 +10,7 @@ const Settings = () => import('../views/settings.js');
 const Coach = () => import('../views/coach.js');
 const Sleep = () => import('../views/sleep.js');
 const Movement = () => import('../views/MovementEngine.js');
-const Tobacco = () => import('../views/TobaccoEngine.js');
+const Tobacco = () => import('../views/TobaccoEngine.js');*/
 
 const routes = [
     { 
@@ -18,7 +18,7 @@ const routes = [
         name: 'dashboard',
         component: Dashboard 
     },
-    { 
+    /*{ 
         path: '/activities', 
         name: 'activities',
         component: Activities 
@@ -73,7 +73,7 @@ const routes = [
         path: '/performance-settings', 
         name: 'settings',
         component: Settings 
-    },
+    },*/
     { 
         path: '/:pathMatch(.*)*', 
         redirect: '/' 
