@@ -7,7 +7,8 @@ export default {
     ...layoutView, // Menggabungkan template HTML dari layoutView.js
     components: {
         'header-component': Header,
-        'sidebar-component': Sidebar
+        'sidebar-component': Sidebar,
+        'nav-component': Navigation
     },
     setup() {
         const { ref } = Vue;
