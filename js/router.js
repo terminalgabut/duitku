@@ -1,4 +1,4 @@
-/*import { Logger } from './services/debug.js';*/
+import { Logger } from './utils/debug.js';
 
 const Dashboard = () => import('../views/dashboard.js');
 /*const Activities = () => import('../views/activities.js');
