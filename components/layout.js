@@ -1,5 +1,6 @@
 import layoutView from './layoutView.js';
 import Header from './header.js';
+import Navigation from './nav.js';
 import Sidebar from './sidebarView.js';
 
 export default {
