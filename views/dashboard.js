@@ -1,8 +1,8 @@
 // dashboard.js
 import dashboardTemplate from './dashboardView.js';
-import PaceChart from './components/PaceChart.js';
+/*import PaceChart from './components/PaceChart.js';
 import { stravaService } from '../js/services/stravaService.js';
-import { ChartLogic } from '../js/utils/chartLogic.js'; 
+import { ChartLogic } from '../js/utils/chartLogic.js'; */
 import { Logger } from '../js/services/debug.js';
 
 export default {
