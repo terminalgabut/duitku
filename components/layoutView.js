@@ -12,6 +12,7 @@ export default {
             <main class="app-content">
                 <router-view></router-view>
             </main>
+            <nav-component></nav-component>
         </div>
     </div>
   `
