@@ -6,9 +6,9 @@ export default {
             <div class="sidebar-logo px-8 py-10">
                 <div class="flex items-center gap-2">
                     <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center shadow-lg shadow-blue-200">
-                        <i data-lucide="zap" class="w-5 h-5 text-white"></i>
+                        <i data-lucide="chart-spline" class="w-5 h-5 text-white"></i>
                     </div>
-                    <span class="text-xl font-black italic text-slate-900 tracking-tighter">NGANGGUR.PRO</span>
+                    <span class="text-xl font-black italic text-slate-900 tracking-tighter">DUITKU PRO</span>
                 </div>
             </div>
 
