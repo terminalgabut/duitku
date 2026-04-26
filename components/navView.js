@@ -1,6 +1,6 @@
 export default {
-    name: 'NavView',
-    template: `
+  name: 'NavView',
+  template: `
     <nav class="fixed bottom-0 left-0 right-0 z-[1000] px-6 pb-8 pointer-events-none">
         <div class="max-w-[420px] mx-auto h-[70px] bg-slate-900/95 backdrop-blur-xl rounded-[28px] flex items-center justify-around px-2 pointer-events-auto shadow-2xl shadow-slate-900/40 border border-slate-800">
             
@@ -22,5 +22,5 @@ export default {
             
         </div>
     </nav>
-    `
+  `
 };
