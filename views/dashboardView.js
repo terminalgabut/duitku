@@ -1,210 +1,146 @@
-// dashboardView.js
+// root/views/dashboardView.js
+
 export default `
-<div class="dashboard-wrapper animate-in" :class="{ 'is-loading': isLoading }">
-    <header class="dashboard-header">
+<div class="dashboard-wrapper animate-in p-4 md:p-6" :class="{ 'is-loading': isLoading }">
+    
+    <header class="mb-8 flex justify-between items-end">
         <div>
-            <h1 class="text-display">Training Analytics</h1>
-            <p class="text-caption mt-1">Deep dive into your performance</p>
+            <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1">Selamat Pagi 👋</p>
+            <h1 class="text-3xl font-black text-slate-900 tracking-tighter italic uppercase">April 2026</h1>
         </div>
-        
-        <div class="filter-group">
-            <select v-model="selectedType" class="select-clean" :disabled="isLoading">
-                <option value="Run">Running</option>
-                <option value="Ride">Cycling</option>
-                <option value="Walk">Walking</option>
-                <option value="Hike">Hiking</option>
-            </select>
-            <select v-model="selectedPeriodKey" class="select-clean" :disabled="isLoading">
-                <option v-for="opt in periodOptions" :key="opt.value" :value="opt.value">
-                    {{ opt.label }}
-                </option>
+        <div class="filter-group flex gap-2">
+            <select v-model="selectedType" class="bg-white border border-slate-200 text-[10px] font-black uppercase p-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20">
+                <option value="Personal">Personal</option>
+                <option value="Bisnis">Bisnis</option>
             </select>
         </div>
     </header>
 
-    <div class="bento-grid-summary">
-        <div class="bento-card">
-            <div class="card-header">
-                <span class="label-muted">Total Distance</span>
-                <div class="icon-box"><i data-lucide="map" class="w-4 h-4"></i></div>
-            </div>
-            <h2 class="stat-value text-2xl">
-                {{ stats.totalDistance }} <span class="text-xs font-medium text-slate-400">km</span>
-            </h2>
-        </div>
+    <div class="relative overflow-hidden bg-gradient-to-br from-[#8DA382] to-[#7A8F70] rounded-[32px] p-8 text-white shadow-xl shadow-[#8DA382]/20 mb-8 transition-transform active:scale-[0.98]">
+        <div class="absolute -right-8 -top-8 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
         
-        <div class="bento-card">
-            <div class="card-header">
-                <span class="label-muted">Total Elevation</span>
-                <div class="icon-box"><i data-lucide="mountain" class="w-4 h-4"></i></div>
+        <div class="relative z-10">
+            <div class="flex justify-between items-center mb-2">
+                <p class="text-[10px] font-bold opacity-80 uppercase tracking-widest">Total Saldo</p>
+                <button class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-md">
+                    <i data-lucide="eye" class="w-4 h-4"></i>
+                </button>
             </div>
-            <h2 class="stat-value text-2xl">
-                {{ stats.elevation }} <span class="text-xs font-medium text-slate-400">m</span>
+            <h2 class="text-4xl font-black tabular-nums leading-none mb-8">
+                Rp{{ (stats.totalBalance || 280070).toLocaleString('id-ID') }}
             </h2>
-        </div>
-
-        <div class="bento-card">
-            <div class="card-header">
-                <span class="label-muted">Activities</span>
-                <div class="icon-box"><i data-lucide="calendar" class="w-4 h-4"></i></div>
-            </div>
-            <h2 class="stat-value text-2xl">{{ stats.totalActivities }}</h2>
-        </div>
-
-        <div class="bento-card">
-            <div class="card-header">
-                <span class="label-muted">{{ performanceConfig.label }}</span>
-                <div class="icon-box">
-                    <i :data-lucide="performanceConfig.icon" class="w-4 h-4"></i>
+            
+            <div class="grid grid-cols-2 gap-4 pt-6 border-t border-white/10">
+                <div>
+                    <div class="flex items-center gap-1 opacity-80 mb-1">
+                        <i data-lucide="arrow-down-left" class="w-3 h-3"></i>
+                        <span class="text-[9px] font-black uppercase tracking-tighter">Pemasukan</span>
+                    </div>
+                    <p class="text-lg font-bold">Rp{{ (stats.income || 721234).toLocaleString('id-ID') }}</p>
+                </div>
+                <div>
+                    <div class="flex items-center gap-1 opacity-80 mb-1">
+                        <i data-lucide="arrow-up-right" class="w-3 h-3"></i>
+                        <span class="text-[9px] font-black uppercase tracking-tighter">Pengeluaran</span>
+                    </div>
+                    <p class="text-lg font-bold">Rp{{ (stats.expense || 441164).toLocaleString('id-ID') }}</p>
                 </div>
             </div>
-            <h2 class="stat-value text-2xl">
-                <template v-if="performanceConfig.showSteps">
-                    {{ (stats.steps || 0).toLocaleString('id-ID') }}
-                </template>
-                <template v-else>
-                    {{ stats.avgPace }}
-                </template>
-                <span class="text-xs font-medium text-slate-400 ml-0.5">
-                    {{ performanceConfig.unit }}
-                </span>
-            </h2>
-        </div>
-
-        <div class="bento-card">
-            <div class="card-header">
-                <span class="label-muted">Calories</span>
-                <div class="icon-box"><i data-lucide="flame" class="w-4 h-4"></i></div>
+            
+            <div class="mt-4 h-1.5 w-full bg-black/10 rounded-full overflow-hidden flex">
+                <div class="h-full bg-emerald-400" style="width: 62%"></div>
+                <div class="h-full bg-rose-400" style="width: 38%"></div>
             </div>
-            <h2 class="stat-value text-2xl">
-                {{ (stats.calories || 0).toLocaleString('id-ID') }} <span class="text-xs font-medium text-slate-400">kcal</span>
-            </h2>
-        </div>
-
-        <div class="bento-card">
-            <div class="card-header">
-                <span class="label-muted">Total Time</span>
-                <div class="icon-box"><i data-lucide="timer" class="w-4 h-4"></i></div>
-            </div>
-            <h2 class="stat-value text-2xl">
-                {{ stats.totalDuration || '00:00' }}
-            </h2>
-            <p class="text-slate-400 uppercase tracking-tighter" style="font-size: 8px; font-weight: 800; margin-top: 4px;">
-                Moving time
-            </p>
-        </div>
-
-        <div class="bento-card animate-in">
-            <div class="card-header">
-                <span class="label-muted">Average Power</span>
-                <div class="icon-box"><i data-lucide="zap" class="w-4 h-4 text-blue-500"></i></div>
-            </div>
-            <h2 class="stat-value text-2xl">
-                {{ stats.avgWatts || 0 }} <span class="text-xs font-medium text-slate-400">W</span>
-            </h2>
-            <p class="text-slate-400 uppercase tracking-tighter" style="font-size: 8px; font-weight: 800; margin-top: 4px;">
-                Avg Wattage
-            </p>
-        </div>
-
-        <div class="bento-card animate-in">
-            <div class="card-header">
-                <span class="label-muted">Energy Output</span>
-                <div class="icon-box"><i data-lucide="battery-charging" class="w-4 h-4 text-amber-500"></i></div>
-            </div>
-            <h2 class="stat-value text-2xl">
-                {{ (stats.totalKilojoules || 0).toLocaleString('id-ID') }} <span class="text-xs font-medium text-slate-400">kJ</span>
-            </h2>
-            <p class="text-slate-400 uppercase tracking-tighter" style="font-size: 8px; font-weight: 800; margin-top: 4px;">
-                Total Work Done
-            </p>
         </div>
     </div>
 
-    <div class="bento-grid-detailed">
-        <div class="bento-card p-6">
-             <h3 class="text-card-title mb-6">Performance Records</h3>
-             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 transition-all hover:bg-white hover:border-blue-100 group">
-                    <p class="label-muted mb-1">Longest Activity</p>
-                    <p class="stat-value text-xl text-slate-900">
-                        {{ stats.records?.longestDistance || '0.00' }} <span class="text-sm font-medium text-slate-400">km</span>
-                    </p>
-                </div>
-                <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 transition-all hover:bg-white hover:border-blue-100 group">
-                    <p class="label-muted mb-1">
-                        {{ selectedType === 'Ride' ? 'Top Speed' : 'Best Effort' }}
-                    </p>
-                    <p class="stat-value text-xl text-slate-900">
-                        {{ stats.records?.bestEffort || '--:--' }}
-                        <span class="text-sm font-medium text-slate-400">
-                             {{ performanceConfig.unit }}
-                        </span>
-                    </p>
-                </div>
-             </div>
+    <div class="mb-8">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-xs font-black text-slate-900 uppercase tracking-widest">Menu</h3>
+            <i data-lucide="sliders-horizontal" class="w-4 h-4 text-slate-400"></i>
         </div>
-
-        <div class="grid grid-cols-1 gap-6 mb-6">
-            <PaceChart 
-                chartId="monthlyPerformance"
-                :title="selectedType === 'Ride' ? 'Average Speed Trend' : 'Average Pace Trend'"
-                :labels="trendData.labels"
-                :datasets="trendData.paceDatasets"
-                :unit="performanceConfig.unit"
-            />
+        <div class="grid grid-cols-4 md:grid-cols-5 gap-3">
+            <div v-for="menu in quickMenus" :key="menu.label" class="flex flex-col items-center gap-2 group cursor-pointer">
+                <div class="w-14 h-14 bg-white rounded-2xl border border-slate-100 shadow-sm flex items-center justify-center group-hover:bg-indigo-50 transition-all group-active:scale-90">
+                    <i :data-lucide="menu.icon" :class="menu.color" class="w-6 h-6"></i>
+                </div>
+                <span class="text-[9px] font-black text-slate-500 uppercase tracking-tighter text-center leading-tight">
+                    {{ menu.label }}
+                </span>
+            </div>
         </div>
+    </div>
 
-        <div class="bento-card p-6">
-            <h3 class="text-card-title mb-6">Recent Log</h3>
-            <div class="space-y-4">
-                <template v-if="isLoading && stats.recentActivities.length === 0">
-                    <div v-for="i in 3" class="h-16 bg-slate-50 rounded-2xl animate-pulse"></div>
-                </template>
-
-                <template v-else>
-                    <div v-for="act in stats.recentActivities" :key="act.id" 
-                         class="flex items-center justify-between p-3 rounded-2xl border border-transparent hover:border-slate-100 hover:bg-slate-50/50 transition-all cursor-pointer group">
-                        
-                        <div class="flex items-center gap-4 min-w-0">
-                            <div class="icon-box group-hover:bg-white transition-all shadow-sm">
-                                <i :data-lucide="act.type === 'Ride' ? 'zap' : (act.type === 'Walk' ? 'footprints' : 'run')" class="w-4 h-4"></i>
-                            </div>
-                            <div class="min-w-0">
-                                <p class="text-xs font-black text-slate-900 truncate">{{ act.name }}</p>
-                                <div class="flex items-center gap-2 mt-0.5">
-                                    <span class="label-muted whitespace-nowrap" style="font-size: 8px;">{{ act.date }}</span>
-                                    <span class="text-slate-200">•</span>
-                                    <span class="label-muted truncate max-w-[120px]" style="font-size: 8px;">
-                                        <i data-lucide="map-pin" class="w-2 h-2 inline mr-0.5"></i>
-                                        {{ act.location_name || 'Global Area' }}
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="flex items-center gap-4">
-                            <div v-if="act.weather_temp" class="hidden sm:flex items-center gap-1.5 px-2 py-1 bg-amber-50 rounded-lg border border-amber-100/50">
-                                <i data-lucide="sun" class="w-3 h-3 text-amber-500"></i>
-                                <span style="font-size: 9px; font-weight: 800;" class="text-amber-700">{{ act.weather_temp }}°</span>
-                            </div>
-                            
-                            <div class="text-right">
-                                <p class="stat-value text-sm text-slate-900">{{ act.distance }} km</p>
-                                <p class="text-slate-400 uppercase tracking-tighter" style="font-size: 8px; font-weight: 800;">
-                                    {{ formatTime(act.moving_time) }}
-                                </p>
-                            </div>
-                        </div>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="lg:col-span-2 space-y-6">
+            <div class="bg-white p-6 rounded-[32px] border border-slate-100 shadow-sm">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xs font-black text-slate-900 uppercase tracking-widest">Tren Pengeluaran</h3>
+                    <span class="text-[9px] font-bold text-slate-400 uppercase">7 Hari Terakhir</span>
+                </div>
+                <div class="h-48 flex items-end gap-2 px-2">
+                    <div v-for="bar in [40, 10, 25, 100, 60, 45, 10]" :key="bar" 
+                         :class="bar === 100 ? 'bg-rose-400' : 'bg-[#8DA382]/40'"
+                         class="flex-1 rounded-t-lg transition-all hover:opacity-80" 
+                         :style="{ height: bar + '%' }">
                     </div>
-                </template>
-                
-                <div v-if="!isLoading && stats.recentActivities.length === 0" class="text-center py-8">
-                    <i data-lucide="database" class="w-8 h-8 text-slate-200 mx-auto mb-2"></i>
-                    <p class="text-caption">No activities recorded for this period.</p>
                 </div>
+                <div class="flex justify-between mt-4 px-2">
+                    <span v-for="day in ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min']" :key="day" class="text-[9px] font-bold text-slate-400 uppercase">{{ day }}</span>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-[32px] border border-slate-100 shadow-sm">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xs font-black text-slate-900 uppercase tracking-widest">Riwayat Transaksi</h3>
+                    <button class="text-[10px] font-black text-indigo-600 uppercase tracking-widest">Lihat Semua</button>
+                </div>
+                <div class="space-y-4">
+                    <div v-for="trx in recentTransactions" :key="trx.id" class="flex items-center justify-between group">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 bg-slate-50 rounded-xl flex items-center justify-center group-hover:bg-indigo-50 transition-colors">
+                                <i :data-lucide="trx.icon" class="w-5 h-5 text-slate-400 group-hover:text-indigo-600"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs font-black text-slate-900 uppercase tracking-tight">{{ trx.note }}</p>
+                                <p class="text-[9px] font-bold text-slate-400 uppercase mt-0.5">{{ trx.category }} • {{ trx.date }}</p>
+                            </div>
+                        </div>
+                        <p :class="trx.type === 'In' ? 'text-emerald-600' : 'text-rose-600'" class="text-sm font-black tabular-nums">
+                            {{ trx.type === 'In' ? '+' : '-' }}Rp{{ trx.amount.toLocaleString('id-ID') }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="space-y-6">
+            <div class="bg-indigo-900 p-6 rounded-[32px] text-white relative overflow-hidden shadow-xl shadow-indigo-200">
+                <div class="absolute -right-4 -top-4 w-24 h-24 bg-white/10 rounded-full blur-2xl"></div>
+                <h3 class="text-[10px] font-black opacity-60 uppercase tracking-[0.2em] mb-4 text-center">Wawasan Keuangan</h3>
+                <div class="bg-white/10 p-4 rounded-2xl backdrop-blur-sm border border-white/5">
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="w-8 h-8 bg-amber-400 rounded-lg flex items-center justify-center shadow-lg shadow-amber-400/20">
+                            <i data-lucide="star" class="w-4 h-4 text-white fill-current"></i>
+                        </div>
+                        <p class="text-[10px] font-black uppercase tracking-tight leading-tight">Pengeluaran Terbesar</p>
+                    </div>
+                    <p class="text-xs font-bold opacity-80 leading-relaxed">Belanja Bahan Baku naik 15% dari rata-rata harian.</p>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-[32px] border border-slate-100 shadow-sm group">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Kekayaan Bersih</span>
+                    <i data-lucide="shield-check" class="w-4 h-4 text-emerald-500"></i>
+                </div>
+                <h2 class="text-2xl font-black text-slate-900 tabular-nums mb-1">-Rp20.000</h2>
+                <div class="w-full bg-slate-100 h-1 rounded-full overflow-hidden">
+                    <div class="bg-rose-500 h-full" style="width: 100%"></div>
+                </div>
+                <p class="text-[9px] font-bold text-rose-500 uppercase mt-2 tracking-tighter">Hutang Terdeteksi Rp20.000</p>
             </div>
         </div>
     </div>
 </div>
-`;
+\`;
