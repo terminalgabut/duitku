@@ -9,6 +9,7 @@
 /* --- COMPONENTS --- */
 @import url('./components/header.css');
 @import url('./components/sidebar.css');
+@import url('./components/navigation.css');
 
 /* --- VIEWS --- */
 @import url('./views/dashboard.css');
