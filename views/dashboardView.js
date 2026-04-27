@@ -9,10 +9,10 @@ export default `
             <h1 class="text-3xl font-black text-slate-900 tracking-tighter italic uppercase">April 2026</h1>
         </div>
         <div class="filter-group flex gap-2">
-            <select v-model="selectedType" class="bg-white border border-slate-200 text-[10px] font-black uppercase p-2.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20">
+            <select v-model="selectedRole" class="bg-white border border-slate-200 text-[10px] font-black uppercase p-2.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20">
                 <option value="Personal">Personal</option>
                 <option value="Bisnis">Bisnis</option>
-                <option value="AllType">All Type</option>
+                <option value="AllRole">All Role</option>
             </select>
         </div>
     </header>
