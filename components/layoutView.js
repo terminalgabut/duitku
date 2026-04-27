@@ -12,8 +12,15 @@ export default {
             <main class="app-content">
                 <router-view></router-view>
             </main>
-            <nav-component></nav-component>
+            
+            <nav-component @open-input="toggleInput"></nav-component>
         </div>
+
+        <input-component 
+            v-if="isInputOpen" 
+            @close-input="toggleInput">
+        </input-component>
+        
     </div>
   `
 };
