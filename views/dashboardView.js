@@ -31,7 +31,7 @@ export default `
                         <span class="w-2 h-2 bg-[#8DA382] rounded-full animate-pulse"></span>
                         <p class="text-[10px] font-bold opacity-60 uppercase tracking-[0.3em]">Total Saldo Tersedia</p>
                     </div>
-                    <h2 class="text-5xl font-white tabular-nums tracking-tighter italic text-emerald-400">
+                    <h2 class="text-5xl font-white tabular-nums tracking-tighter italic text-amber-400">
                         <span class="text-xl font-medium not-italic opacity-50 mr-1">Rp</span>{{ (stats.totalBalance || 280070).toLocaleString('id-ID') }}
                     </h2>
                 </div>
