@@ -30,10 +30,11 @@ export default `
                     <div class="flex items-center gap-2 mb-2">
                         <span class="w-2 h-2 bg-[#8DA382] rounded-full animate-pulse"></span>
                         <p class="text-[10px] font-bold opacity-60 uppercase tracking-[0.3em]">Total Saldo Tersedia</p>
-                    </div>
-                    <h2 class="text-5xl font-black tabular-nums tracking-tighter italic text-amber-400">
-                        <span class="text-xl font-medium not-italic opacity-50 mr-1">Rp</span>{{ (stats.totalBalance || 280070).toLocaleString('id-ID') }}
-                    </h2>
+                    <h2 class="text-5xl font-black tabular-nums tracking-[-0.05em] italic text-amber-400 drop-shadow-[0_2px_10px_rgba(251,191,36,0.4)]">
+    <span class="text-xl font-bold not-italic mr-1 text-amber-400">Rp</span>
+    
+    {{ (stats.totalBalance || 280070).toLocaleString('id-ID') }}
+</h2>
                 </div>
                 <button class="p-3 bg-white/10 hover:bg-white/20 rounded-2xl backdrop-blur-xl border border-white/10 transition-colors">
                     <i data-lucide="eye" class="w-5 h-5 text-white"></i>
