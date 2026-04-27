@@ -12,7 +12,7 @@ export default `
             <select v-model="selectedType" class="bg-white border border-slate-200 text-[10px] font-black uppercase p-2.5 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/20">
                 <option value="Personal">Personal</option>
                 <option value="Bisnis">Bisnis</option>
-                <option value="All">All</option>
+                <option value="AllType">All Type</option>
             </select>
         </div>
     </header>
