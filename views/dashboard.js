@@ -91,7 +91,7 @@ export default {
         });
 
         // --- WATCHERS ---
-        watch([selectedType, selectedPeriodKey], loadDashboardData);
+        watch([selectedRole, selectedPeriodKey], loadDashboardData);
         
         onMounted(() => {
             loadDashboardData();
@@ -100,7 +100,7 @@ export default {
         return { 
             stats, 
             isLoading, 
-            selectedType, 
+            selectedRole, 
             selectedPeriodKey, 
             periodOptions, 
             trendData,
