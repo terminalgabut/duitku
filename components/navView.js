@@ -19,7 +19,7 @@ export default {
                 <span class="nav-label text-[8px] font-black uppercase tracking-tighter group-[.router-link-active]:text-indigo-600 text-slate-400">Riwayat</span>
             </router-link>
 
-            <button @click="$emit('open-input')" class="nav-item flex flex-col items-center gap-1 flex-1 outline-none group">
+            <button @click="openInputModal" class="nav-item flex flex-col items-center gap-1 flex-1 outline-none group">
                 <div class="p-3 -mt-10 bg-indigo-600 rounded-2xl text-white shadow-lg shadow-indigo-200 hover:bg-indigo-700 transition-all active:scale-90 border-4 border-white">
                     <i data-lucide="plus" class="w-6 h-6"></i>
                 </div>
