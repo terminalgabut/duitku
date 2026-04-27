@@ -9,7 +9,7 @@ export default {
         const { ref, onMounted, watch, nextTick, computed } = Vue;
         
         // State Filter
-        const selectedType = ref('Bisnis'); 
+        const selectedRole = ref('Bisnis'); 
         const selectedPeriodKey = ref('this-month'); 
         const isLoading = ref(true);
         
